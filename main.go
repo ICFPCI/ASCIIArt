@@ -7,8 +7,7 @@ import (
 )
 
 func main() {
-
-	img, imageType, err := utils.LoadImage("/home/fabrizzio/Desktop/code/image_filters/test/test.png")
+	img, imageType, err := utils.LoadImage("images/test.png")
 
 	if err != nil {
 		fmt.Print("Error: ", err)
@@ -17,14 +16,23 @@ func main() {
 
 	fmt.Println(imageType)
 
-	pixels := utils.ImageToTensors(img)
+	downscaledImg := utils.DownSample(img, 8)
 
-	// Applying filters
-	filters.UpsideDown(pixels)
+	grayScaleImg := utils.ConvertToGray(downscaledImg)
+	// grayScaleImg = utils.QuantizeGray(grayScaleImg, 10)
 
-	if err := utils.SaveImage(pixels); err != nil {
+	asciiImg, err := filters.ASCIIArt(grayScaleImg)
+
+	// asciiImg = utils.Resize(asciiImg, img.Bounds())
+
+	if err != nil {
 		fmt.Println(err)
+		return
 	}
+
+	print(asciiImg)
+
+	utils.SaveImage(asciiImg)
 
 	fmt.Println("Save file to ./result/")
 
