@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	img, imageType, err := utils.LoadImage("images/test.png")
+	img, imageType, err := utils.LoadImage("images/test.jpeg")
 
 	if err != nil {
 		fmt.Print("Error: ", err)
