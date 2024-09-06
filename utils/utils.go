@@ -126,7 +126,7 @@ func Resize(img image.Image, originalSize image.Rectangle) image.Image {
 	return newImg
 }
 
-func ConvertToGray(img image.Image) image.Gray {
+func ConvertToGray(img image.Image) image.Image {
 	bounds := img.Bounds()
 
 	grayImg := image.NewGray(bounds)
@@ -139,7 +139,7 @@ func ConvertToGray(img image.Image) image.Gray {
 		}
 	}
 
-	return *grayImg
+	return grayImg
 }
 
 func QuantizeGray(img *image.Gray, numLevels int) *image.Gray {

@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	img, imageType, err := utils.LoadImage("images/test.jpeg")
+	img, imageType, err := utils.LoadImage("images/gato.png")
 
 	if err != nil {
 		fmt.Print("Error: ", err)
@@ -23,7 +23,7 @@ func main() {
 
 	asciiImg, err := filters.ASCIIArt(grayScaleImg)
 
-	// asciiImg = utils.Resize(asciiImg, img.Bounds())
+	asciiImg = utils.Resize(asciiImg, img.Bounds())
 
 	if err != nil {
 		fmt.Println(err)

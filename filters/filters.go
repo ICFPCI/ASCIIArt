@@ -1,7 +1,6 @@
 package filters
 
 import (
-	"fmt"
 	"image"
 	"image/color"
 	"image_filters/utils"
@@ -12,15 +11,16 @@ func getTileIndex(gray uint8) int {
 	return int(normalized * 9)
 }
 
-func ASCIIArt(img image.Gray) (image.Image, error) {
-	texture, _, err := utils.LoadImage("images/texture.png")
+func ASCIIArt(img image.Image) (image.Image, error) {
+	texture, _, err := utils.LoadImage("textures/chars.png")
 
 	if err != nil {
 		return nil, err
 	}
 
 	bounds := img.Bounds()
-	newImg := image.NewRGBA(bounds)
+	rect := image.Rect(0, 0, bounds.Dx()*8, bounds.Dy()*8)
+	newImg := image.NewRGBA(rect)
 
 	tileSize := 8
 
@@ -34,15 +34,10 @@ func ASCIIArt(img image.Gray) (image.Image, error) {
 
 			for dy := 0; dy < tileSize; dy++ {
 				for dx := 0; dx < tileSize; dx++ {
-					tx := x + dx
-					ty := y + dy
-					// if tx < bounds.Max.X && ty < bounds.Max.Y {
+					tx := x*8 + dx
+					ty := y*8 + dy
 					textureX := tileIndex*8 + dx
-					fmt.Printf("x: %d, y: %d\n", tileIndex, dy)
-
-					newImg.Set(tx, ty, texture.At(textureX+dx, dy))
-					// newImg.Set(tx, ty, color.RGBA{R: 255, G: 0, B: 0, A: 255})
-					// }
+					newImg.Set(tx, ty, texture.At(textureX, dy))
 				}
 			}
 		}
