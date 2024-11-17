@@ -3,7 +3,7 @@ package filters
 import (
 	"image"
 	"image/color"
-	"image_filters/utils"
+	"image_filters/api/utils"
 )
 
 func getTileIndex(gray uint8) int {
@@ -12,7 +12,7 @@ func getTileIndex(gray uint8) int {
 }
 
 func ASCIIArt(img image.Image) (image.Image, error) {
-	texture, _, err := utils.LoadImage("textures/chars.png")
+	texture, _, err := utils.LoadImage("api/textures/chars.png")
 
 	if err != nil {
 		return nil, err
